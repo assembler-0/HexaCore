@@ -1,5 +1,7 @@
 { pkgs }: {
 	deps = [
+   pkgs.run
+   pkgs.adoptopenjdk-jre-hotspot-bin-15
    pkgs.nasm
    pkgs.iproute
    pkgs.pciutils
