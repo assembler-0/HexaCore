@@ -1,6 +1,11 @@
+#include "CLI11.hpp"
+#include <cmath>
+#include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
+typedef double db;
 using namespace std;
-int main(){
-  cout << "hello world\n";
-  return 0;
+int main(int argc, char *argv[]) {
+  
 }

@@ -1,5 +1,6 @@
 { pkgs }: {
 	deps = [
+   pkgs.vulkan-tools
    pkgs.sudo
    pkgs.run
    pkgs.adoptopenjdk-jre-hotspot-bin-15
