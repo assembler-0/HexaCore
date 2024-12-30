@@ -1,5 +1,6 @@
 { pkgs }: {
 	deps = [
+   pkgs.em
    pkgs.vulkan-tools
    pkgs.sudo
    pkgs.run
