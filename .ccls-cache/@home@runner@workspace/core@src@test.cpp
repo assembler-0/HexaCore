@@ -1,5 +1,5 @@
-#include "CLI11.hpp"
-#include "exprtk.hpp"
+#include "../headers/CLI11.hpp"
+#include "../headers/exprtk.hpp"
 #include <iostream>
 
 int main(int argc, char **argv) {

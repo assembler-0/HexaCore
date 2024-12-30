@@ -1,1 +1,1 @@
-# Hynix-engine
+# HexaCore
