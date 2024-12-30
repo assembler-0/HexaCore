@@ -1,5 +1,6 @@
 { pkgs }: {
 	deps = [
+   pkgs.sudo
    pkgs.run
    pkgs.adoptopenjdk-jre-hotspot-bin-15
    pkgs.nasm
