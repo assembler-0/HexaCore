@@ -60,9 +60,7 @@
         "complex": "cpp",
         "source_location": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled",
-    "vcpkg.target.useManifest": false,
-    "cmake.configureArgs": [
-        "-DVCPKG_MANIFEST_MODE=OFF"
-    ]
+    "C_Cpp.errorSquiggles": "enabled",
+   
+    
 }
