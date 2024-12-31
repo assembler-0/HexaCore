@@ -1,5 +1,6 @@
 #include "../include/CLI11.hpp"
 #include "../include/exprtk.hpp"
+#include <fmt>
 #include <cmath>
 #include <fstream>
 #include <iostream>

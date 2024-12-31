@@ -5,3 +5,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_executable(HexaCore src/main.cpp)
 target_include_directories(HexaCore PRIVATE include)
 
+cmake -DCMAKE_TOOLCHAIN_FILE=/workspaces/HexaCore/vcpkg/scripts/buildsystems/vcpkg.cmake ..r
+
