@@ -1,0 +1,3 @@
+/workspaces/HexaCore/build/CMakeFiles/rebuild_cache.dir
+/workspaces/HexaCore/build/CMakeFiles/edit_cache.dir
+/workspaces/HexaCore/build/CMakeFiles/HexaCore.dir
