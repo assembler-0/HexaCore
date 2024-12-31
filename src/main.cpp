@@ -24,10 +24,10 @@ void scientific_display(void){
     cout << setw(3) << bold << bright_green << "cos()"<< setw(25) << "cosh" << setw(26) << "pow()\n" << reset;
     cout << setw(3) << bold << bright_green << "sin()"<< setw(25) << "sinh" << setw(26) <<"sqrt()\n" << reset;
     cout << setw(3) << bold << bright_green << "tan()"<< setw(25) << "tanh" << setw(26) <<"cbrt()\n" << reset;
-    cout << setw(3) << bold << bright_green << "acos()"<< setw(25) << "acosh()\n"<< reset;
-    cout << setw(3) << bold << bright_green << "asin()" << setw(25) <<"asinh()\n"<< reset;
-    cout << setw(3) << bold << bright_green << "atan()" << setw(25) <<"atanh()\n"<< reset;
-
+    cout << setw(3) << bold << bright_green << "acos()"<< setw(27) << "acosh()\n"<< reset;
+    cout << setw(3) << bold << bright_green << "asin()" << setw(27) <<"asinh()\n"<< reset;
+    cout << setw(3) << bold << bright_green << "atan()" << setw(27) <<"atanh()\n"<< reset;
+    cout << bright_green <<"NOTE: if you want to calculate normal expression, just type like: 5+4*8-sin(90)+pow(2,3)\n" << reset;
     mode = true;
     return;
     
