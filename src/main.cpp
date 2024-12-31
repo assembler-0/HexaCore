@@ -47,8 +47,8 @@ int main(int argc, char** argv) {
         return 1;
     }
     double result = expr.value();
-    cout << result;
+    cout << result << '\n';
     return 0; 
-
+    
 }
  

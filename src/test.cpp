@@ -45,6 +45,6 @@ int main() {
     std::cout << termcolor::bold << "Bold Text" << termcolor::reset << std::endl;
     std::cout << termcolor::underline << "Underlined Text" << termcolor::reset << std::endl;
     std::cout << termcolor::reverse << "Reversed Colors" << termcolor::reset << std::endl;
-
     return 0;
+
 }

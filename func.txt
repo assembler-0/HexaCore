@@ -17,3 +17,4 @@ pow
 sqrt
 cbrt
 
+sd
