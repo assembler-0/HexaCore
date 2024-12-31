@@ -7,8 +7,7 @@
 #include <string>
 typedef double db;
 using namespace std;
-string version("alpha 0.1");
-int main(int argc, char *argv[]) {
-  cout << "HexaCore " << version << endl;
-  return 0;
+int main(){
+    cout << "hello world";
+    return 0;
 }

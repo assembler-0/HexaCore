@@ -1,5 +1,7 @@
 { pkgs }: {
 	deps = [
+   pkgs.unzip
+   pkgs.ncurses
    pkgs.cmake
    pkgs.em
    pkgs.vulkan-tools
