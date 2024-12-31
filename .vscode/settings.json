@@ -55,7 +55,10 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "bitset": "cpp",
+        "complex": "cpp",
+        "source_location": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "vcpkg.target.useManifest": false,
