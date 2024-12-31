@@ -30,7 +30,6 @@ void scientific_display(void){
     cout << bright_green <<"NOTE: if you want to calculate normal expression, just type like: 5+4*8-sin(90)+pow(2,3)\n" << reset;
     mode = true;
     return;
-    
 }
 void extra_display(void){
     
