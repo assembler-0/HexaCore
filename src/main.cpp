@@ -12,17 +12,23 @@ using namespace termcolor;
 string version ("alpha 0.1");
 string expression;
 char mode1;
-void scientific_compute(string op){
-
-}
-void extra_compute(string op){
-
+bool mode;
+double exprtk_cbrt(double x){
+    return cbrt(x);
 }
 void scientific_display(void){
     cout<< setw(0) <<bold << bright_green << "Trigonometric" << reset
         << setw(14) << bold << bright_green << "Hyperbolic" << reset
         << setw(21) << bold << bright_green << "Power" << reset << '\n';
     cout << bold << bright_green << string(55, '-') << reset << '\n';
+    cout << setw(3) << bold << bright_green << "cos()"<< setw(25) << "cosh" << setw(26) << "pow()\n" << reset;
+    cout << setw(3) << bold << bright_green << "sin()"<< setw(25) << "sinh" << setw(26) <<"sqrt()\n" << reset;
+    cout << setw(3) << bold << bright_green << "tan()"<< setw(25) << "tanh" << setw(26) <<"cbrt()\n" << reset;
+    cout << setw(3) << bold << bright_green << "acos()"<< setw(25) << "acosh()\n"<< reset;
+    cout << setw(3) << bold << bright_green << "asin()" << setw(25) <<"asinh()\n"<< reset;
+    cout << setw(3) << bold << bright_green << "atan()" << setw(25) <<"atanh()\n"<< reset;
+
+    mode = true;
     return;
     
 }
@@ -38,16 +44,22 @@ int main(int argc, char** argv) {
         case('e'): extra_display(); break;
         default: break;
     }
-    cout << "enter expression: ";
+    if(mode != true){
+        return 0;
+    }
+    exprtk::symbol_table<double> symbol_table; 
+    symbol_table.add_function("cbrt", exprtk_cbrt);
+    cout << bold << bright_blue << "Pleases enter operation you want to perform: " << reset;
     cin >> expression;
     exprtk::expression<double> expr;
+    expr.register_symbol_table(symbol_table);
     exprtk::parser<double> parser;
     if (!parser.compile(expression, expr)) {
         std::cerr << "Error: " << parser.error() << "\n";
         return 1;
     }
     double result = expr.value();
-    cout << result << '\n';
+    cout << bold << underline << red << "Returned value: "<< result << endl << reset;
     return 0; 
     
 }
