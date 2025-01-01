@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#define pi 3.141592
 using namespace std;
 using namespace termcolor;
 string version ("alpha 0.1"); //version
@@ -103,7 +104,7 @@ void plotGraph(const string& expressionStr, int width, int height) {
         cout << bold << bright_green << row << endl << reset;
     }
 }
-void sigmasum(void){
+void sigma_s(void){
     cout << blue << bold << "Please enter function: " << reset;
     cin >> expressionStr;
     cout << blue << bold << "x goes from: " << reset;
@@ -113,27 +114,28 @@ void sigmasum(void){
     exprtk::symbol_table<double> symbol_table;
     symbol_table.add_variable("x", x_value); 
     exprtk::expression<double> expression;
+    expression.register_symbol_table(symbol_table);
     exprtk::parser<double> parser;
     if (!parser.compile(expressionStr, expression)) {
         std::cerr << "Error parsing the expression!" << std::endl;
         return;
     }
-    expression.register_symbol_table(symbol_table); 
     for (int i = a; i <= b; ++i) {
         x_value = i;  // Set the value of x
         sum += expression.value();  // Evaluate the expression
     }
-    cout << "Sum of f(x) from " << a << " to " << b << " is: " << sum << std::endl;
+    cout << red << bold << underline << "Sum of f(x) from " << a << " to " << b << " is: " << sum << '\n' << reset;
 }
+
 void sci_advanced(void){
     cout << bold << green << string(55, '-') << reset << '\n';
     cout << bold << green << "Welcome to the advaced section!\n";
     cout << bold << green << string(55, '-') << reset << '\n';
-    cout << bold << green << "sum('s')" << reset;
-    cout << bold << green << "Please enter your slection: " << reset;
+    cout << bold << green << "sum('s')\n" << reset;
+    cout << bold << blue << "Please enter your slection: " << reset;
     cin >> option_advanced;
     switch(option_advanced){
-        case('s'): sigmasum(); break;
+        case('s'): sigma_s(); break;
         default: break;
     }
     return;
@@ -163,12 +165,13 @@ void scientific(void){
     cout << bold << bright_green << setw(0) << "Other expresions\n" << reset;
     cout << bold << bright_green << string(55, '-') << reset << '\n';
     cout << bold << bright_green << setw(0) << "gcd()\tlcm()\tfactorial\n" << reset; 
-    cout << bright_green <<"#NOTE: if you want to calculate normal expression, just type like: 5+4*8-sin(90)+pow(2,3)\n" << reset;
+    cout << bright_green <<"#NOTE: if you want to calculate normal expression\n just type like: 5+4*8-sin(90)+pow(2,3)\n" << reset;
     exprtk::symbol_table<double> symbol_table; 
     symbol_table.add_function("cbrt", exprtk_cbrt);
     cout << bold << bright_blue << "Pleases enter operation you want to perform: " << reset;
     cin >> expressionStr;
-    if(expressionStr == "dev.advanced"){
+    if(expressionStr == "q"){return;}
+    if(expressionStr == "dev"){
         sci_advanced();
         return;
     }
@@ -224,7 +227,7 @@ void graph(void){
     return;
 }
 int main(int argc, char** argv) {
-    cout << setw(0) <<red << bold << underline << "HexaCore " << version << reset << '\n';
+    cout << setw(0) <<red << bold << underline << "HexaCore " << version << " - a powerful CLI calculator" <<reset << '\n';
     cout << bright_blue << bold << "Please choose mode SCIENTIFIC [s] EXTRA [e] GRAPHING [g]: " << reset;
     cin >> mode;
     switch(mode){
