@@ -8,6 +8,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 using namespace termcolor;
 string version ("alpha 0.1"); //version
@@ -15,8 +16,30 @@ string expressionStr;
 signed int precision;
 double maxY, minY;
 char mode;
+int a , b;
+double sum (0);
+double x_value (0);
+char option_advanced;
 double exprtk_cbrt(double x){
     return cbrt(x);
+}
+long long factorial(int n) {
+    long long result = 1;
+    for (int i = 1; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+double gcd(double a, double b) {
+    while (b != 0) {
+        double temp = b;
+        b = fmod(a, b);
+        a = temp;
+    }
+    return a;
+}
+double lcm(double a, double b) {
+    return abs(a * b) / gcd(a, b);
 }
 double evaluateExpression_graph(const std::string& expressionStr, double x) {
     exprtk::symbol_table<double> symbol_table;
@@ -80,6 +103,41 @@ void plotGraph(const string& expressionStr, int width, int height) {
         cout << bold << bright_green << row << endl << reset;
     }
 }
+void sigmasum(void){
+    cout << blue << bold << "Please enter function: " << reset;
+    cin >> expressionStr;
+    cout << blue << bold << "x goes from: " << reset;
+    cin >> a;
+    cout << blue << bold << "to: " << reset;
+    cin >> b;
+    exprtk::symbol_table<double> symbol_table;
+    symbol_table.add_variable("x", x_value); 
+    exprtk::expression<double> expression;
+    exprtk::parser<double> parser;
+    if (!parser.compile(expressionStr, expression)) {
+        std::cerr << "Error parsing the expression!" << std::endl;
+        return;
+    }
+    expression.register_symbol_table(symbol_table); 
+    for (int i = a; i <= b; ++i) {
+        x_value = i;  // Set the value of x
+        sum += expression.value();  // Evaluate the expression
+    }
+    cout << "Sum of f(x) from " << a << " to " << b << " is: " << sum << std::endl;
+}
+void sci_advanced(void){
+    cout << bold << green << string(55, '-') << reset << '\n';
+    cout << bold << green << "Welcome to the advaced section!\n";
+    cout << bold << green << string(55, '-') << reset << '\n';
+    cout << bold << green << "sum('s')" << reset;
+    cout << bold << green << "Please enter your slection: " << reset;
+    cin >> option_advanced;
+    switch(option_advanced){
+        case('s'): sigmasum(); break;
+        default: break;
+    }
+    return;
+}
 void scientific(void){
     cout << bold << bright_green << string(55, '-') << reset << '\n'; 
     cout<< setw(0) <<bold << bright_green << "Trigonometric" << reset
@@ -101,11 +159,41 @@ void scientific(void){
     cout << bold << bright_green << setw(3) << "log()" << setw(26) << "ceil()" << setw(26) << "min()\n" << reset;
     cout << bold << bright_green << setw(3) << "log10()" << setw(25) << "round()" << setw(25) << "max()\n" << reset;
     cout << bold << bright_green << setw(57) << "min()\n" << reset;
+    cout << bold << bright_green << string(55, '-') << reset << '\n';
+    cout << bold << bright_green << setw(0) << "Other expresions\n" << reset;
+    cout << bold << bright_green << string(55, '-') << reset << '\n';
+    cout << bold << bright_green << setw(0) << "gcd()\tlcm()\tfactorial\n" << reset; 
     cout << bright_green <<"#NOTE: if you want to calculate normal expression, just type like: 5+4*8-sin(90)+pow(2,3)\n" << reset;
     exprtk::symbol_table<double> symbol_table; 
     symbol_table.add_function("cbrt", exprtk_cbrt);
     cout << bold << bright_blue << "Pleases enter operation you want to perform: " << reset;
     cin >> expressionStr;
+    if(expressionStr == "dev.advanced"){
+        sci_advanced();
+        return;
+    }
+    if(expressionStr == "factorial"){
+        cout << bright_blue << bold << "Please enter a value to factorial: " << reset;
+        cin >> a;
+        cout << red << bold << underline << a << "! = " << factorial(a) << '\n' << reset;
+        return;
+    }
+    if(expressionStr == "gcd"){
+        cout << bold << bright_blue << "Please enter first parameter: " << reset;
+        cin >> a;
+        cout << bold << bright_blue << "Please enter second parameter: " << reset;
+        cin >> b;
+        cout << bold << underline << red << "Returned value: " << gcd(a,b) << endl << reset;
+        return;
+    }
+    if(expressionStr == "lcm"){
+        cout << bold << bright_blue << "Please enter first parameter: " << reset;
+        cin >> a;
+        cout << bold << bright_blue << "Please enter second parameter: " << reset;
+        cin >> b;
+        cout << bold << underline << red << "Returned value: " << lcm(a,b) << endl << reset;
+        return;
+    }
     exprtk::expression<double> expr;
     expr.register_symbol_table(symbol_table);
     exprtk::parser<double> parser;
@@ -136,13 +224,13 @@ void graph(void){
     return;
 }
 int main(int argc, char** argv) {
-    cout << setw(39) <<red << bold << underline << "HexaCore " << version << reset << '\n';
+    cout << setw(0) <<red << bold << underline << "HexaCore " << version << reset << '\n';
     cout << bright_blue << bold << "Please choose mode SCIENTIFIC [s] EXTRA [e] GRAPHING [g]: " << reset;
     cin >> mode;
     switch(mode){
-        case('s'): scientific();
-        case('e'): extra(); //modes
-        case('g'): graph();
+        case('s'): scientific(); break;
+        case('e'): extra(); break; //modes
+        case('g'): graph(); break;
         default: break;
     }
     return 0; 
