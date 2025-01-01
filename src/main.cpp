@@ -31,6 +31,9 @@ void scientific(void){
     cout<< setw(0) <<bold << bright_green << "Exp/Log" << reset
         << setw(22) << bold << bright_green << "Rounding" << reset
         << setw(20) << bold << bright_green << "Abs+Others" << reset << '\n';
+    cout << bold << bright_green << string(55, '-') << reset << '\n';
+    cout << bold << bright_green << setw(3) << "exp()" << setw(25) << "floor()" << setw(27) << "abs()\n" << reset;
+    cout << bold << bright_green << setw(3) << "log()" << setw(25) << "ceil()" << setw(27) << "min()\n" << reset;
     cout << bright_green <<"#NOTE: if you want to calculate normal expression, just type like: 5+4*8-sin(90)+pow(2,3)\n" << reset;
     exprtk::symbol_table<double> symbol_table; 
     symbol_table.add_function("cbrt", exprtk_cbrt);
