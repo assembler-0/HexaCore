@@ -1,50 +1,72 @@
 #include <iostream>
-#include "../include/termcolor.hpp"
+#include <string>
+#include <vector>
+#include <cmath>
+#include "../include/exprtk.hpp"
+
+using namespace std;
+
+// Function to evaluate the mathematical expression for a given x
+double evaluateExpression(const std::string& expressionStr, double x) {
+    exprtk::symbol_table<double> symbol_table;
+    symbol_table.add_variable("x", x);
+
+    exprtk::expression<double> expression;
+    expression.register_symbol_table(symbol_table);
+
+    exprtk::parser<double> parser;
+    if (!parser.compile(expressionStr, expression)) {
+        cerr << "Error parsing expression: " << parser.error() << endl;
+        return NAN;
+    }
+
+    return expression.value();
+}
+
+// Function to plot the graph in ASCII
+void plotGraph(const string& expressionStr, int width, int height) {
+    vector<string> canvas(height, string(width, ' '));
+
+    const double xMin = -10.0, xMax = 10.0; // Range of x
+    const double yMin = -1.5, yMax = 1.5;   // Range of y
+
+    const double xStep = (xMax - xMin) / width;
+    const double yStep = (yMax - yMin) / height;
+
+    // Draw axes
+    int xAxis = height / 2;
+    int yAxis = width / 2;
+    for (int x = 0; x < width; ++x) canvas[xAxis][x] = '-';
+    for (int y = 0; y < height; ++y) canvas[y][yAxis] = '|';
+    canvas[xAxis][yAxis] = '+'; // Origin
+
+    // Plot points
+    for (double x = xMin; x <= xMax; x += xStep) {
+        double y = evaluateExpression(expressionStr, x);
+        if (!std::isnan(y)) {
+            int plotX = static_cast<int>((x - xMin) * (width - 1) / (xMax - xMin));
+            int plotY = static_cast<int>((yMax - y) * (height - 1) / (yMax - yMin));
+            if (plotX >= 0 && plotX < width && plotY >= 0 && plotY < height) {
+                canvas[plotY][plotX] = '*';
+            }
+        }
+    }
+
+    // Print the canvas
+    for (const auto& row : canvas) {
+        cout << row << endl;
+    }
+}
 
 int main() {
-    // Foreground colors
- 
-    std::cout << termcolor::red << "Red Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::green << "Green Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::yellow << "Yellow Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::blue << "Blue Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::magenta << "Magenta Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::cyan << "Cyan Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::white << "White Text" << termcolor::reset << std::endl;
+    cout << "Enter the function you want to graph (e.g., x^2 - 2): ";
+    string expressionStr;
+    getline(cin, expressionStr);
 
-    // Bright foreground colors
-    std::cout << termcolor::bright_red << "Bright Red Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::bright_green << "Bright Green Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::bright_yellow << "Bright Yellow Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::bright_blue << "Bright Blue Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::bright_magenta << "Bright Magenta Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::bright_cyan << "Bright Cyan Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::bright_white << "Bright White Text" << termcolor::reset << std::endl;
+    const int width = 85;  // Width of the graph (number of columns)
+    const int height = 30; // Height of the graph (number of rows)
 
-    // Background colors
-   
-    std::cout << termcolor::on_red << "Text on Red Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_green << "Text on Green Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_yellow << "Text on Yellow Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_blue << "Text on Blue Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_magenta << "Text on Magenta Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_cyan << "Text on Cyan Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_white << "Text on White Background" << termcolor::reset << std::endl;
+    plotGraph(expressionStr, width, height);
 
-    // Bright background colors
-  
-    std::cout << termcolor::on_bright_red << "Text on Bright Red Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_bright_green << "Text on Bright Green Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_bright_yellow << "Text on Bright Yellow Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_bright_blue << "Text on Bright Blue Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_bright_magenta << "Text on Bright Magenta Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_bright_cyan << "Text on Bright Cyan Background" << termcolor::reset << std::endl;
-    std::cout << termcolor::on_bright_white << "Text on Bright White Background" << termcolor::reset << std::endl;
-
-    // Modifiers
-    std::cout << termcolor::bold << "Bold Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::underline << "Underlined Text" << termcolor::reset << std::endl;
-    std::cout << termcolor::reverse << "Reversed Colors" << termcolor::reset << std::endl;
     return 0;
-
 }

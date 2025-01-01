@@ -1,5 +1,0 @@
-    exp(x), log(x), log10(x). 
-
-    floor(x), ceil(x), round(x)
-
-    abs(x) min(x, y), max(x, y), mod(x, y)
