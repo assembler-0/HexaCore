@@ -121,8 +121,20 @@ void sigma_s(void){
         sum += expression.value();  // Evaluate the expression
     }
     cout << red << bold << underline << "Sum of f(x) from " << a << " to " << b << " is: " << sum << '\n' << reset;
+    return;
 }
-
+void intergration(void){
+    cout << blue << bold << "Please enter function in this format int(upper_limit, lower_limmit, function, var): " << reset;
+    cin >> expressionStr;
+    exprtk::expression<double> expression;
+    exprtk::parser<double> parser;
+    if(!parser.compile(expressionStr, expression)){
+        cerr << "Error " << parser.error() << endl;
+        return;
+    }
+    cout << red << bold << underline << "Returned value: " << expression.value() << endl <<reset;
+    return;
+}
 void sci_advanced(void){
     cout << bold << green << string(55, '-') << reset << '\n';
     cout << bold << green << "Welcome to the advaced section!\n";
@@ -132,6 +144,7 @@ void sci_advanced(void){
     cin >> option_advanced;
     switch(option_advanced){
         case('s'): sigma_s(); break;
+        case('i'): intergration(); break;
         default: break;
     }
     return;
