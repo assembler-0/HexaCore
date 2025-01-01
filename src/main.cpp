@@ -1,12 +1,13 @@
 #include "../include/CLI11.hpp"
 #include "../include/exprtk.hpp"
 #include "../include/termcolor.hpp"
+#include "../include/Eigen/Dense"
 #include <iomanip>
 #include <cmath>            //headers, includes
 #include <iostream>
 #include <vector>
 #include <algorithm>
-      using namespace std;
+using namespace std;
 using namespace termcolor;
 string version ("alpha 0.1");
 string expressionStr; //version
