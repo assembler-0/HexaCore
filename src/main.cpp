@@ -3,23 +3,17 @@
 #include "../include/termcolor.hpp"
 #include <iomanip>
 #include <cmath>            //headers, includes
-#include <fstream>
 #include <iostream>
-#include <sstream>
-#include <string>
 #include <vector>
 #include <algorithm>
-#define pi 3.141592
 using namespace std;
 using namespace termcolor;
-string version ("alpha 0.1"); //version
-string expressionStr;
+string version ("alpha 0.1");
+string expressionStr; //version
 signed int precision;
 double maxY, minY;
 char mode;
 int a , b;
-double sum (0);
-double x_value (0);
 char option_advanced;
 double exprtk_cbrt(double x){
     return cbrt(x);
@@ -34,13 +28,13 @@ long long factorial(int n) {
 double gcd(double a, double b) {
     while (b != 0) {
         double temp = b;
-        b = fmod(a, b);
+        b = std::fmod(a, b);
         a = temp;
     }
     return a;
 }
 double lcm(double a, double b) {
-    return abs(a * b) / gcd(a, b);
+    return std::abs(a * b) / gcd(a, b);
 }
 double evaluateExpression_graph(const std::string& expressionStr, double x) {
     exprtk::symbol_table<double> symbol_table;
@@ -72,7 +66,7 @@ void cMaxMin(const string& expressionStr, double xMin, double xMax, double& maxY
 }
 
 void plotGraph(const string& expressionStr, int width, int height) {
-    vector<string> canvas(height, string(width, ' '));
+    std::vector<string> canvas(height, string(width, ' '));
 
     const double xMin = -10.0, xMax = 10.0; // Range of x
     const double yMin = -1.5, yMax = 1.5;   // Range of y
@@ -105,6 +99,8 @@ void plotGraph(const string& expressionStr, int width, int height) {
     }
 }
 void sigma_s(void){
+    double sum (0);
+    double x_value (0);
     cout << blue << bold << "Please enter function: " << reset;
     cin >> expressionStr;
     cout << blue << bold << "x goes from: " << reset;

@@ -60,7 +60,7 @@
         "complex": "cpp",
         "source_location": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled",
+    "C_Cpp.errorSquiggles": "enabled",
    
     
 }
