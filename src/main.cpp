@@ -1,7 +1,6 @@
 #include "../include/CLI11.hpp"
 #include "../include/exprtk.hpp"
 #include "../include/termcolor.hpp"
-#include "../include/Eigen/Dense"
 #include <iomanip>
 #include <cmath>            //headers, includes
 #include <iostream>
