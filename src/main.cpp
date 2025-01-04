@@ -129,7 +129,7 @@ void intergration(void){
     exprtk::expression<double> expression;
     exprtk::parser<double> parser;
     if(!parser.compile(expressionStr, expression)){
-        cerr << "Error " << parser.error() << endl;
+        cerr << "error parsing expression: " << expressionStr;
         return;
     }
     cout << red << bold << underline << "Returned value: " << expression.value() << endl <<reset;
