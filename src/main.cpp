@@ -124,15 +124,22 @@ void sigma_s(void){
     return;
 }
 void intergration(void){
-    cout << blue << bold << "Please enter function in this format int(upper_limit, lower_limmit, function, var): " << reset;
+    double x_value (0);
+    cout << blue << bold << "Please enter function: " << reset;
     cin >> expressionStr;
+    cout << blue << bold << "x goes from: " << reset;
+    cin >> a;
+    cout << blue << bold << "to: " << reset;
+    cin >> b;
+    exprtk::symbol_table<double> symbol_table;
+    symbol_table.add_variable("x", x_value); 
     exprtk::expression<double> expression;
+    expression.register_symbol_table(symbol_table);
     exprtk::parser<double> parser;
-    if(!parser.compile(expressionStr, expression)){
-        cerr << "error parsing expression: " << expressionStr;
+    if (!parser.compile(expressionStr, expression)) {
+        std::cerr << "Error parsing the expression!" << std::endl;
         return;
     }
-    cout << red << bold << underline << "Returned value: " << expression.value() << endl <<reset;
     return;
 }
 void sci_advanced(void){
