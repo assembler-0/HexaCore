@@ -164,7 +164,7 @@ void sigma_s(void){
         x_value = i;  // Set the value of x
         sum += expression.value();  // Evaluate the expression
     }
-    cout << red << bold << fixed << setprecision(0) << underline << "Sum of " << expression.value() << " from " << a << " to " << b << " is: " << sum << '\n' << reset;
+    cout << red << bold << fixed << setprecision(0) << underline << "Sum of f(x) from " << a << " to " << b << " is: " << sum << '\n' << reset;
     return;
 }
 void scientific(void){
