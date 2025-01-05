@@ -1,7 +1,7 @@
 #include "../include/CLI11.hpp"
 #include "../include/exprtk.hpp"
 #include "../include/termcolor.hpp"
-#include "../include/math/quadrature/trapezoidal.hpp"
+#include "../include/boost/boost/math/quadrature/trapezoidal.hpp"
 #include <iomanip>
 #include <cmath>            //headers, includes
 #include <iostream>
@@ -9,12 +9,13 @@
 #include <algorithm>
 using namespace std;
 using namespace termcolor;
+using namespace boost;
 string version ("alpha 0.1");
 string expressionStr; //version
 signed int precision;
 double maxY, minY;
 char mode;
-int a , b;
+double a , b;
 char option_advanced;
 double exprtk_cbrt(double x){
     return cbrt(x);
@@ -141,7 +142,7 @@ void intergration(void){
         std::cerr << "Error parsing the expression!" << std::endl;
         return;
     }
-    cout << red << bold << underline << "Intergration is aproximately: " << boost::math::quadrature::trapezoidal(expression.value(), a, b, 1e-6) << reset;
+    cout << red << bold << underline << "Intergration is aproximately: " << boost::math::quadrature::trapezoidal(expression.value(), a, b, 0.0000001) << reset;
     return;
 }
 void sci_advanced(void){
