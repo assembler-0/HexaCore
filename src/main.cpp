@@ -1,7 +1,6 @@
 #include "../include/CLI11.hpp"
 #include "../include/exprtk.hpp"
 #include "../include/termcolor.hpp"
-#include "../include/boost/boost/math/quadrature/trapezoidal.hpp"
 #include <iomanip>
 #include <cmath>            //headers, includes
 #include <iostream>
@@ -9,7 +8,6 @@
 #include <algorithm>
 using namespace std;
 using namespace termcolor;
-using namespace boost;
 string version ("alpha 0.1");
 string expressionStr; //version
 signed int precision;
@@ -126,23 +124,6 @@ void sigma_s(void){
     return;
 }
 void intergration(void){
-    double x_value (0);
-    cout << blue << bold << "Please enter function: " << reset;
-    cin >> expressionStr;
-    cout << blue << bold << "Upper limit: " << reset;
-    cin >> a;
-    cout << blue << bold << "Lower limit: " << reset;
-    cin >> b;
-    exprtk::symbol_table<double> symbol_table;
-    symbol_table.add_variable("x", x_value); 
-    exprtk::expression<double> expression;
-    expression.register_symbol_table(symbol_table);
-    exprtk::parser<double> parser;
-    if (!parser.compile(expressionStr, expression)) {
-        std::cerr << "Error parsing the expression!" << std::endl;
-        return;
-    }
-    cout << red << bold << underline << "Intergration is aproximately: " << boost::math::quadrature::trapezoidal(expression.value(), a, b, 0.0000001) << reset;
     return;
 }
 void sci_advanced(void){
