@@ -1,6 +1,7 @@
 #include "../include/CLI11.hpp"
 #include "../include/exprtk.hpp"
 #include "../include/termcolor.hpp"
+#include "../include/math/quadrature/trapezoidal.hpp"
 #include <iomanip>
 #include <cmath>            //headers, includes
 #include <iostream>
@@ -127,9 +128,9 @@ void intergration(void){
     double x_value (0);
     cout << blue << bold << "Please enter function: " << reset;
     cin >> expressionStr;
-    cout << blue << bold << "x goes from: " << reset;
+    cout << blue << bold << "Upper limit: " << reset;
     cin >> a;
-    cout << blue << bold << "to: " << reset;
+    cout << blue << bold << "Lower limit: " << reset;
     cin >> b;
     exprtk::symbol_table<double> symbol_table;
     symbol_table.add_variable("x", x_value); 
@@ -140,6 +141,7 @@ void intergration(void){
         std::cerr << "Error parsing the expression!" << std::endl;
         return;
     }
+    cout << red << bold << underline << "Intergration is aproximately: " << boost::math::quadrature::trapezoidal(expression.value(), a, b, 1e-6) << reset;
     return;
 }
 void sci_advanced(void){
