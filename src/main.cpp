@@ -71,7 +71,7 @@ double evaluateExpression_graph(const std::string& expressionStr, double x) {
     return expression.value();
 }
 void cMaxMin(const string& expressionStr, double xMin, double xMax, double& maxY, double& minY) {
-    const double step = 0.01; // Small step for accurate results
+    const double step = 0.001; // Small step for accurate results
     maxY = -INFINITY;
     minY = INFINITY;
 
