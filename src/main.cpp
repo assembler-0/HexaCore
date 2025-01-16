@@ -15,6 +15,8 @@ double maxY, minY;
 char mode, func_sci;
 double a , b, n;
 char option_advanced;
+double pi (3.1415926535);
+double e (2.7182818284);
 double exprtk_cbrt(double x){
     return cbrt(x);
 }
@@ -211,6 +213,9 @@ void scientific(void){
         }
         return;
     }else{
+        exprtk::symbol_table<double> symbol_table;
+        symbol_table.add_variable("pi", pi);
+        symbol_table.add_variable("e", e);
         exprtk::expression<double> expr;
         expr.register_symbol_table(symbol_table);
         exprtk::parser<double> parser;
@@ -219,7 +224,7 @@ void scientific(void){
             return; //if cannot parse
         }
         double result = expr.value();
-        cout << bold << underline << red << "Returned value: "<< result << endl << reset;
+        cout << bold << underline << red << fixed << setprecision(13) << "Returned value: "<< result << endl << reset;
         return;
     }
     return;
@@ -254,4 +259,3 @@ int main(int argc, char** argv) {
     }
     return 0; 
 }
- 
